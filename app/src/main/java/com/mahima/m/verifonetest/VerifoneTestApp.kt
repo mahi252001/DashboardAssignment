@@ -1,4 +1,8 @@
 package com.mahima.m.verifonetest
 
-class VerifoneTestApp {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+
+@HiltAndroidApp
+class VerifoneTestApp: Application()

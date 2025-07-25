@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VerifoneTest</string>
+    <string name="welcome">WELCOME %1$s</string>
+    <string name="recent_transaction">Recent Transactions</string>
+    <string name="transaction_id">ID: %1$s</string>
+    <string name="amount">Rs. %1$.2f</string>
+    <string name="retry">Retry</string>
+</resources>
