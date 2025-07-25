@@ -1,54 +1,59 @@
-
 # V1.0.0
 
-You can find the binaries in the [releases](https://github.com/your-username/your-repo/releases/tag/v1.0.0)
+You can find the binaries in the [releases](https://github.com/mahi252001/DashboardAssignment/releases/tag/1)
 
 ## Project Structure
 
-3 Modules:
-- **app** module – Dashboard UI
-- **core** module – Shared models, utils, theme
-- **data** module – Remote API, repositories
+2 Modules:
+- **app** module – UI, ViewModel, UseCase, and models
+- **data** module – Remote API integration, DI and repositories
 
-### [app module](https://github.com/your-username/your-repo/tree/main/app)
+---
 
-This is the Android client module that:
-- Implements the UI using Jetpack Compose
-- Follows Clean MVVM architecture
-- Uses Hilt for DI and ViewModel instantiation
-- Displays the Dashboard screen by sequentially fetching:
-  - User Profile
-  - Recent Transactions
-  - System Configuration
+### [app module](https://github.com/mahi252001/DashboardAssignment/tree/main/app)
 
-It also handles:
-- Error/retry logic
-- Dynamic theming (dark/light)
-- Showing/hiding transaction counterparty based on configuration
+This is the main Android application module that:
+- Implements the Dashboard UI using Jetpack Compose
+- Follows **Clean MVVM** architecture
+- Contains:
+  - ViewModels
+  - UseCases
+  - UI state management (StateFlow, sealed classes)
+  - Error handling
+  - Theme switching via `SystemConfig`
+  - Hilt setup for dependency injection
 
-### [data module](https://github.com/your-username/your-repo/tree/main/data)
+The dashboard screen loads:
+1. Profile
+2. Transactions (requires profile)
+3. System Configuration  
+All network calls are executed **sequentially using Kotlin Coroutines** with **structured concurrency**.
 
-This module contains:
-- Retrofit-based API layer
-- Repository implementations for the use case layer
-- DTOs for `Profile`, `Transaction`, and `SystemConfig`
+---
 
-All calls are made sequentially using Kotlin Coroutines with proper error handling and cancellation.
-
-### [core module](https://github.com/your-username/your-repo/tree/main/core)
+### [data module](https://github.com/mahi252001/DashboardAssignment/tree/main/app/data)
 
 This module contains:
-- Domain models
-- Use case for `DashboardUseCase`
-- Utility classes (e.g., error mapping, constants)
-- Sealed classes like `Result`, `ThemeMode`, `TransactionType`, and `TransactionStatus`
+- Retrofit API services
+- Repositories for Profile, Transactions, and Config
+- DTOs matching the backend response models
+
+It abstracts all network communication and exposes domain-safe results to the app module.
+
+---
 
 ## Sequence Diagram
 
-Here is a basic sequence diagram explaining the dashboard loading flow:
+Here's a high-level sequence diagram describing the dashboard loading flow:
 
 <br>
 
 <img src="https://github.com/mahi252001/DashboardAssignment/blob/main/sequence.png" alt="Dashboard Sequence Flow"/>
 
-> **Note:** This diagram shows the ordered API flow and retry logic for the dashboard screen.
+> 💡 This diagram outlines the sequential call order and retry logic from UI to API layer.
+
+## 🎬 UI Demo
+
+<img src="https://raw.githubusercontent.com/mahi252001/DashboardAssignment/main/TransactionDashboard.gif" width="100%" alt="Dashboard Demo"/>
+
+---
