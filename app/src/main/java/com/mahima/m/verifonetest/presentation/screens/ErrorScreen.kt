@@ -1,6 +1,7 @@
 package com.mahima.m.verifonetest.presentation.screens
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -18,16 +19,21 @@ import com.mahima.m.verifonetest.R
 @Composable
 fun ErrorScreen(message: String, onRetry: () -> Unit) {
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp), contentAlignment = Alignment.Center) {
-        Text(text = message, color = Color.Red)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp), contentAlignment = Alignment.Center
+    ) {
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = message, color = Color.Red)
 
-        Button(onClick = onRetry) {
-            Text(text = stringResource(R.string.retry))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = onRetry) {
+                Text(text = stringResource(R.string.retry))
+            }
+
         }
-
     }
 }
